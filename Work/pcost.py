@@ -1,17 +1,22 @@
 # pcost.py
 #
-# Exercise 1.27 - Michael King
+# Exercise 1.30 - Michael King
 
-# Calculate how much it costs to purchase all of the shares in the portfolio
+# Turning script from exercise 1.27 into a function
 
-total_cost = 0.0
+def portfolio_cost(filename):
 
-f = open('Data/portfolio.csv', 'rt')
-headers = next(f)
-for line in f:
-    row = line.split(',')
-    #print(row)
-    total_cost = int(row[1]) * float(row[2]) + total_cost
+    total_cost = 0.0
 
-f.close()
-print('Total cost', total_cost)
+    f = open(filename, 'rt')
+    headers = next(f)
+    for line in f:
+        row = line.split(',')
+        #print(row)
+        total_cost = int(row[1]) * float(row[2]) + total_cost
+
+    return total_cost
+
+#f.close()
+cost = portfolio_cost(filename)
+print('Total cost', cost)
