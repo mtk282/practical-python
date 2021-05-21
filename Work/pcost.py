@@ -1,8 +1,8 @@
 # pcost.py
 #
-# Exercise 1.30 - Michael King
+# Exercise 1.31 - Michael King
 
-# Turning script from exercise 1.27 into a function
+# Error Handling
 
 def portfolio_cost(filename):
 
@@ -11,9 +11,12 @@ def portfolio_cost(filename):
     f = open(filename, 'rt')
     headers = next(f)
     for line in f:
-        row = line.split(',')
-        #print(row)
-        total_cost = int(row[1]) * float(row[2]) + total_cost
+        try:
+            row = line.split(',')
+            #print(row)
+            total_cost = int(row[1]) * float(row[2]) + total_cost
+        except ValueError:
+            print('Bad row', row)
 
     return total_cost
 
