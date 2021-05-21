@@ -1,9 +1,10 @@
 # pcost.py
 #
-# Exercise 1.32 - Michael King
+# Exercise 1.33 - Michael King
 
-# Using a library function - 'csv' module
+# Reading from the command line
 
+import sys
 import csv
 
 def portfolio_cost(filename):
@@ -23,6 +24,11 @@ def portfolio_cost(filename):
 
     return total_cost
 
+if len(sys.argv) ==2:
+    filename = sys.argv[1]
+else:
+ filename = 'Data/portfolio.csv'
+
 #f.close()
 cost = portfolio_cost(filename)
-print('Total cost', cost)
+print('Total cost:', cost)
