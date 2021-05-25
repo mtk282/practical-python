@@ -1,6 +1,6 @@
 # report.py
 #
-# Exercise 2.5 - Michael King
+# Exercise 2.16 - Michael King
 
 import csv
 
@@ -12,10 +12,11 @@ def read_portfolio(filename):
         rows = csv.reader(f)
         headers = next(rows)
         for row in rows:
+            record = dict(zip(headers, row))  ## Added for Exercise 2.16
             dict_stock = {
-                 'name'   : row[0],
-                 'shares' : int(row[1]),
-                 'price'   : float(row[2])
+                 'name'   : record['name'],
+                 'shares' : int(record['shares']),
+                 'price'   : float(record['price'])
             }
             portfolio.append(dict_stock)
 
@@ -25,22 +26,22 @@ def read_portfolio(filename):
 
 def read_prices(filename):
     '''Reads prices into a dictionary'''
-    dict = {}
+    prices = {}
 
     with open(filename, 'rt') as f:
         rows = csv.reader(f)
         for row in rows:
             try:
-                dict[row[0]] = float(row[1])
+                prices[row[0]] = float(row[1])
             except IndexError:
                 pass
 
-    return dict
+    return prices
 
 ##Exercise 2.7 - Finding out if you can retire
 #Read both dictionaries 
 portfolio = read_portfolio('Data/portfolio.csv')
-dict = read_prices('Data/prices.csv')
+prices = read_prices('Data/prices.csv')
 
 # Total cost of the portfolio from portfolio.csv
 total_cost = 0.0
@@ -52,7 +53,7 @@ print('Total cost', total_cost)
 # Current value of the portfolio from prices.csv
 total_value = 0.0
 for s in portfolio:
-    total_value += s['shares']*dict[s['name']]
+    total_value += s['shares']*prices[s['name']]
 
 print('Current value', total_value)
 print('Gain', total_value - total_cost)
@@ -63,7 +64,7 @@ def make_report(portfolio,dict):
     """Makes a report"""
     rows = []
     for s in portfolio:
-        current_price = dict[s['name']] ##Current share price
+        current_price = prices[s['name']] ##Current share price
         change = current_price - s['price'] ##Change in the share price
         summary = (s['name'], s['shares'], current_price, change) ##List of tuples
         rows.append(summary)
