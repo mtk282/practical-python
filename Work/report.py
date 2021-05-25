@@ -56,3 +56,28 @@ for s in portfolio:
 
 print('Current value', total_value)
 print('Gain', total_value - total_cost)
+
+##Exercise 2.9 - Collecting Data
+
+def make_report(portfolio,dict):
+    """Makes a report"""
+    rows = []
+    for s in portfolio:
+        current_price = dict[s['name']] ##Current share price
+        change = current_price - s['price'] ##Change in the share price
+        summary = (s['name'], s['shares'], current_price, change) ##List of tuples
+        rows.append(summary)
+    return rows
+
+##Exercise 2.11 - Adding some headers
+
+portfolio = read_portfolio('Data/portfolio.csv')
+prices = read_prices('Data/prices.csv')
+report = make_report(portfolio, prices)
+
+headers = ('Name', 'Shares', 'Price', 'Change')
+print('%10s %10s %10s %10s' % headers)
+print(('-' * 10 + ' ') * len(headers))
+
+for r in report:
+    print('%10s %10d %10.2f %10.2f' % r)
