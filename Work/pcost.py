@@ -1,8 +1,8 @@
 # pcost.py
 #
-# Exercise 1.33 - Michael King
+# Exercise 2.15 - Michael King
 
-# Reading from the command line
+# A practical enumerate() example
 
 import sys
 import csv
@@ -14,13 +14,15 @@ def portfolio_cost(filename):
     f = open(filename)
     rows = csv.reader(f)
     headers = next(f)
-    for line in f:
+    #for line in f:
+    for rowno, row in enumerate(rows, start=1):
         try:
-            row = line.split(',')
+            #row = line.split(',')
             #print(row)
             total_cost = int(row[1]) * float(row[2]) + total_cost
         except ValueError:
-            print('Bad row', row)
+            #print('Bad row', row)
+            print(f'Row{rowno}: Bad row: {row}')
 
     return total_cost
 
