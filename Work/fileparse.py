@@ -1,12 +1,12 @@
 # fileparse.py
 #
-# Exercise 3.4 - Michael King
+# Exercise 3.5 - Michael King
 
-#Building a column selector
+#Performing a type conversion
 
 import csv
 
-def parse_csv(filename, select = None):
+def parse_csv(filename, select = None, types=[str, int, float]):
     '''
     Parse a CSV file into a list of records
     '''
@@ -17,6 +17,7 @@ def parse_csv(filename, select = None):
         headers = next(rows)
         # If a column selector was given, find indices of the specified columns.
         # Also narrow the set of headers used for resulting dictionaries
+
         if select:
             indices = [headers.index(colname) for colname in select]
             headers = select
@@ -30,6 +31,9 @@ def parse_csv(filename, select = None):
             # Filter the row if specific columns were selected
             if indices:
                 row = [ row[index] for index in indices ]
+
+            if types:
+                row = [func(val) for func, val in zip(types, row)]
 
             record = dict(zip(headers, row))
             records.append(record)
