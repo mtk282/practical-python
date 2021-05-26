@@ -1,6 +1,6 @@
 # report.py
 #
-# Exercise 2.16 - Michael King
+# Exercise 3.2 - Michael King
 
 import csv
 
@@ -40,27 +40,27 @@ def read_prices(filename):
 
 ##Exercise 2.7 - Finding out if you can retire
 #Read both dictionaries 
-portfolio = read_portfolio('Data/portfolio.csv')
-prices = read_prices('Data/prices.csv')
+#portfolio = read_portfolio('Data/portfolio.csv')
+#prices = read_prices('Data/prices.csv')
 
 # Total cost of the portfolio from portfolio.csv
-total_cost = 0.0
-for s in portfolio:
-    total_cost += s['shares']*s['price']
+#total_cost = 0.0
+#for s in portfolio:
+ #   total_cost += s['shares']*s['price']
 
-print('Total cost', total_cost)
+#print('Total cost', total_cost)
 
 # Current value of the portfolio from prices.csv
-total_value = 0.0
-for s in portfolio:
-    total_value += s['shares']*prices[s['name']]
+#total_value = 0.0
+#for s in portfolio:
+ #   total_value += s['shares']*prices[s['name']]
 
-print('Current value', total_value)
-print('Gain', total_value - total_cost)
+#print('Current value', total_value)
+#print('Gain', total_value - total_cost)
 
 ##Exercise 2.9 - Collecting Data
 
-def make_report(portfolio,dict):
+def make_report_data(portfolio,prices):
     """Makes a report"""
     rows = []
     for s in portfolio:
@@ -70,15 +70,30 @@ def make_report(portfolio,dict):
         rows.append(summary)
     return rows
 
-##Exercise 2.11 - Adding some headers
+##Exercise 3.1 Make a print report function
 
-portfolio = read_portfolio('Data/portfolio.csv')
-prices = read_prices('Data/prices.csv')
-report = make_report(portfolio, prices)
+def print_report(reportdata):
 
-headers = ('Name', 'Shares', 'Price', 'Change')
-print('%10s %10s %10s %10s' % headers)
-print(('-' * 10 + ' ') * len(headers))
+    """Prints the report"""
 
-for r in report:
-    print('%10s %10d %10.2f %10.2f' % r)
+    headers = ('Name', 'Shares', 'Price', 'Change')
+    print('%10s %10s %10s %10s' % headers)
+    print(('-' * 10 + ' ') * len(headers))
+
+    for row in reportdata:
+        print('%10s %10d %10.2f %10.2f' % row)
+
+#Exercise 3.2 Creating a top level function for porgram execution
+
+def portfolio_report(portfile,pricefile):
+
+    """Make a report based on stock data taken from files"""
+
+    portfolio = read_portfolio(portfile)
+    prices = read_prices(pricefile)
+
+    report = make_report_data(portfolio, prices)
+
+    print_report(report)
+
+portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
