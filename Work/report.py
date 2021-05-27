@@ -5,7 +5,7 @@
 import csv
 
 def read_portfolio(filename):
-    '''Opens a given portfolio file and reads it into a list of dictionary'''
+    '''Opens a csv file and reads it into a list of dictionaries'''
     portfolio = []
 
     with open(filename, 'rt') as f:
@@ -38,30 +38,9 @@ def read_prices(filename):
 
     return prices
 
-##Exercise 2.7 - Finding out if you can retire
-#Read both dictionaries 
-#portfolio = read_portfolio('Data/portfolio.csv')
-#prices = read_prices('Data/prices.csv')
-
-# Total cost of the portfolio from portfolio.csv
-#total_cost = 0.0
-#for s in portfolio:
- #   total_cost += s['shares']*s['price']
-
-#print('Total cost', total_cost)
-
-# Current value of the portfolio from prices.csv
-#total_value = 0.0
-#for s in portfolio:
- #   total_value += s['shares']*prices[s['name']]
-
-#print('Current value', total_value)
-#print('Gain', total_value - total_cost)
-
-##Exercise 2.9 - Collecting Data
 
 def make_report_data(portfolio,prices):
-    """Makes a report"""
+    """Create data that will go into a report"""
     rows = []
     for s in portfolio:
         current_price = prices[s['name']] ##Current share price
