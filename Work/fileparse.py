@@ -1,17 +1,22 @@
 # fileparse.py
 #
-# Exercise 3.6 - Michael King
+# Exercise 3.8 - Michael King
 
-#Working without headers
+#Raising exceptions
 
 import csv
 
-def parse_csv(filename, select = None, types=[str, int, float], has_headers = True):
+def parse_csv(filename, select = None, types=[str, int, float], has_headers = True, delimiter=','):
     '''
     Parse a CSV file into a list of records
     '''
+
+    if select and not has_headers:
+        raise RuntimeError('select argument requires column headers') #Raise a runtime error if columns are specified but 'has_headers' is false
+        
+
     with open(filename) as f:
-        rows = csv.reader(f)
+        rows = csv.reader(f, delimiter=delimiter)
 
         # Read the file headers
         headers = next(rows) if has_headers else []
