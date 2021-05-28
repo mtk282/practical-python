@@ -1,43 +1,23 @@
-# report.py
+#report.py
 #
-# Exercise 3.2 - Michael King
+# Exercise 3.12 - Michael King
 
 import csv
+import fileparse
+
+#Read the portfolio using fileparse
 
 def read_portfolio(filename):
     '''Opens a csv file and reads it into a list of dictionaries'''
-    portfolio = []
+    
+    return fileparse.parse_csv(filename, select=['name','shares','price'], types=[str,int,float])
 
-    with open(filename, 'rt') as f:
-        rows = csv.reader(f)
-        headers = next(rows)
-        for row in rows:
-            record = dict(zip(headers, row))  ## Added for Exercise 2.16
-            dict_stock = {
-                 'name'   : record['name'],
-                 'shares' : int(record['shares']),
-                 'price'   : float(record['price'])
-            }
-            portfolio.append(dict_stock)
-
-    return portfolio
-
-##Exercise 2.6 - Read the prices into a dictionary
+##Read the prices into a dictionary using fileparse
 
 def read_prices(filename):
     '''Reads prices into a dictionary'''
-    prices = {}
-
-    with open(filename, 'rt') as f:
-        rows = csv.reader(f)
-        for row in rows:
-            try:
-                prices[row[0]] = float(row[1])
-            except IndexError:
-                pass
-
-    return prices
-
+    
+    return dict(fileparse.parse_csv(filename, types=[str,float], has_headers = False))
 
 def make_report_data(portfolio,prices):
     """Create data that will go into a report"""
