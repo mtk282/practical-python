@@ -1,6 +1,6 @@
 #report.py
 #
-# Exercise 3.15 - Michael King
+# Exercise 3.16 - Michael King
 
 import csv
 import fileparse
@@ -62,7 +62,8 @@ def main(args):
     portfolio_report(args[1], args[2])
 
 if __name__ == '__main__':
-    main()
+    import sys
+    main(sys.argv)
 
 
 
