@@ -1,6 +1,6 @@
 #report.py
 #
-# Exercise 3.12 - Michael King
+# Exercise 3.15 - Michael King
 
 import csv
 import fileparse
@@ -55,4 +55,15 @@ def portfolio_report(portfile,pricefile):
 
     print_report(report)
 
-portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
+# Main function
+
+def main(args):
+    
+    portfolio_report(args[1], args[2])
+
+if __name__ == '__main__':
+    main()
+
+
+
+
