@@ -1,8 +1,8 @@
 # pcost.py
 #
-# Exercise 3.15 - Michael King
+# Exercise 3.16 - Michael King
 
-# main() functions
+# Making scripts
 
 import sys
 import csv
@@ -19,4 +19,5 @@ def main(args):
     print('Total cost:', portfolio_cost(filename))
 
 if __name__ == '__main__':
-    main()
+    import sys
+    main(sys.argv)
