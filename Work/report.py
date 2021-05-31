@@ -1,23 +1,25 @@
 #report.py
 #
-# Exercise 3.16 - Michael King
+# Exercise 3.18 - Michael King
 
 import csv
 import fileparse
 
-#Read the portfolio using fileparse
+
 
 def read_portfolio(filename):
     '''Opens a csv file and reads it into a list of dictionaries'''
-    
-    return fileparse.parse_csv(filename, select=['name','shares','price'], types=[str,int,float])
+    with open(filename) as lines:
+
+        return fileparse.parse_csv(lines, select=['name','shares','price'], types=[str,int,float])
 
 ##Read the prices into a dictionary using fileparse
 
 def read_prices(filename):
     '''Reads prices into a dictionary'''
-    
-    return dict(fileparse.parse_csv(filename, types=[str,float], has_headers = False))
+    with open(filename) as lines:
+
+        return dict(fileparse.parse_csv(lines, types=[str,float], has_headers = False))
 
 def make_report_data(portfolio,prices):
     """Create data that will go into a report"""
@@ -55,7 +57,7 @@ def portfolio_report(portfile,pricefile):
 
     print_report(report)
 
-# Main function
+# Main function that can be operated from the terminal
 
 def main(args):
     
